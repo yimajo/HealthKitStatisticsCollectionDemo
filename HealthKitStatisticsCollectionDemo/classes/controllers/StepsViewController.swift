@@ -50,7 +50,14 @@ class StepsViewController: UITableViewController {
             
             let item = statisticsCollection.statistics()[statisticsCollection.statistics().count - indexPath.row - 1]
             
-            cell.textLabel?.text = "\(Int(item.sumQuantity()!.doubleValueForUnit(HKUnit.countUnit())))"
+            var array = [String]()
+            for source in item.sources! {
+                if let sum = item.sumQuantityForSource(source) {
+                    array.append("\(Int(sum.doubleValueForUnit(HKUnit.countUnit())))")
+                }
+            }
+            
+            cell.textLabel?.text = "\(Int(item.sumQuantity()!.doubleValueForUnit(HKUnit.countUnit()))) [\(array.joinWithSeparator(","))]"
             cell.detailTextLabel?.text = "\(dateFormatter.stringFromDate(item.startDate))"
             
         }
