@@ -82,7 +82,6 @@ private extension StepsViewController {
         let intervalComponents = NSDateComponents()
         intervalComponents.day = 1
         
-        // optionで厳密にどこで切るかを指定。startで厳密に切ってしまうと一週間前の日の今の時間からしか取得できない
         let predicate = HKQuery.predicateForSamplesWithStartDate(startDate, endDate: endDate, options: [.None])
         let quantityType = HKObjectType.quantityTypeForIdentifier(HKQuantityTypeIdentifierStepCount)!
         let statsOptions: HKStatisticsOptions = [HKStatisticsOptions.SeparateBySource, HKStatisticsOptions.CumulativeSum]
