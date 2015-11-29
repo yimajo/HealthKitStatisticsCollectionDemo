@@ -13,15 +13,8 @@ import HealthKit
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-    let healthStore = HKHealthStore()
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
-
-        healthStore.handleAuthorizationForExtensionWithCompletion { success, error in
-            if let error = error where !success {
-                print("The error was: \(error.localizedDescription)")
-            }
-        }
 
         return true
     }

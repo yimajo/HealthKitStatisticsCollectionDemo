@@ -24,7 +24,16 @@ class StepsViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        requestWeakStatisticsCollection()
+        let typesToRead = Set([HKObjectType.quantityTypeForIdentifier(HKQuantityTypeIdentifierStepCount)!])
+        
+        healthStore.requestAuthorizationToShareTypes(nil, readTypes: typesToRead) { [unowned self] success, error in
+            if let error = error where !success {
+                print(error.description)
+                return
+            }
+            
+            self.requestWeakStatisticsCollection()
+        }
     }
     
     override func didReceiveMemoryWarning() {
